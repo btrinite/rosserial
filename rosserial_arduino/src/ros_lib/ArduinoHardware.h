@@ -35,6 +35,10 @@
 #ifndef ROS_ARDUINO_HARDWARE_H_
 #define ROS_ARDUINO_HARDWARE_H_
 
+#ifndef (ROSSERIAL_BAUD)
+#define ROSSERIAL_BAUD 57600
+#endif
+
 #if ARDUINO>=100
   #include <Arduino.h>  // Arduino 1.0
 #else
@@ -64,7 +68,7 @@
 
 class ArduinoHardware {
   public:
-    ArduinoHardware(SERIAL_CLASS* io , long baud= 57600){
+    ArduinoHardware(SERIAL_CLASS* io , long baud= ROSSERIAL_BAUD){
       iostream = io;
       baud_ = baud;
     }
@@ -76,9 +80,13 @@ class ArduinoHardware {
 #elif defined(USE_TEENSY_HW_SERIAL) or defined(USE_STM32_HW_SERIAL)
       iostream = &Serial1;
 #else
+#ifdef ROSSERIAL_OVERRIDE_SERIAL_CLASS
+    iostream = ROSSERIAL_OVERRIDE_SERIAL_CLASS;
+#else
       iostream = &Serial;
 #endif
-      baud_ = 57600;
+#endif
+      baud_ = ROSSERIAL_BAUD;
     }
     ArduinoHardware(ArduinoHardware& h){
       this->iostream = h.iostream;
@@ -100,7 +108,11 @@ class ArduinoHardware {
       // Startup delay as a fail-safe to upload a new sketch
       delay(3000); 
 #endif
+#if defined(ROSSERIAL_RXD_PIN) && defined(ROSSERIAL_TXD_PIN)
+      iostream->begin(baud_, SERIAL_8N1, ROSSERIAL_RXD_PIN, ROSSERIAL_TXD_PIN);
+#else
       iostream->begin(baud_);
+#endif
     }
 
     int read(){return iostream->read();};
