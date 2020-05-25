@@ -503,7 +503,7 @@ private:
   boost::asio::io_service& io_service_;
   Socket socket_;
   AsyncReadBuffer<Socket> async_read_buffer_;
-  enum { buffer_max = 1023 };
+  enum { buffer_max = 64000 };
   bool active_;
 
   ros::NodeHandle nh_;
