@@ -14,10 +14,9 @@ Please see [rosserial on the ROS wiki](http://wiki.ros.org/rosserial) to get sta
 Exemple of directive in an Arduino sketch (esp32) :
     ```
     #define ROSSERIAL_BAUD 1500000
-    #define ROSSERIAL_OVERRIDE_SERIAL_CLASS Serial1
+    #define ROSSERIAL_OVERRIDE_SERIAL_CLASS &Serial1
     #define ROSSERIAL_RXD_PIN 18
     #define ROSSERIAL_TXD_PIN 19
 
 # additonal node on hoz to use high speed :
     If you have trouble using rosserial on high speed UART (like me trying to use 1500000 baud uart link with esp32), Please read http://programmersought.com/article/95921196958/
-    

@@ -35,7 +35,7 @@
 #ifndef ROS_ARDUINO_HARDWARE_H_
 #define ROS_ARDUINO_HARDWARE_H_
 
-#ifndef (ROSSERIAL_BAUD)
+#ifndef ROSSERIAL_BAUD
 #define ROSSERIAL_BAUD 57600
 #endif
 
@@ -81,7 +81,7 @@ class ArduinoHardware {
       iostream = &Serial1;
 #else
 #ifdef ROSSERIAL_OVERRIDE_SERIAL_CLASS
-    iostream = ROSSERIAL_OVERRIDE_SERIAL_CLASS;
+      iostream = ROSSERIAL_OVERRIDE_SERIAL_CLASS;
 #else
       iostream = &Serial;
 #endif
