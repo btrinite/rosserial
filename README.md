@@ -18,5 +18,5 @@ Exemple of directive in an Arduino sketch (esp32) :
     #define ROSSERIAL_RXD_PIN 18
     #define ROSSERIAL_TXD_PIN 19
 
-# additonal node on hoz to use high speed :
+# additonal node on how to use high speed :
     If you have trouble using rosserial on high speed UART (like me trying to use 1500000 baud uart link with esp32), Please read http://programmersought.com/article/95921196958/
